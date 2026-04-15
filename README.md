@@ -11,7 +11,7 @@
 </p>
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-offline-setup/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/agentic-ai-research/dr-nons-offline-coding-master/main/install.sh)
 ```
 
 ---
@@ -88,13 +88,13 @@ This setup was built through real-world trial and error. Every error in this tab
 ### The One-Liner
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-offline-setup/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/agentic-ai-research/dr-nons-offline-coding-master/main/install.sh)
 ```
 
 ### From Clone
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/openclaw-offline-setup
+git clone https://github.com/agentic-ai-research/dr-nons-offline-coding-master
 cd openclaw-offline-setup
 chmod +x install.sh
 ./install.sh
