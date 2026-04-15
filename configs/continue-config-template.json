@@ -1,0 +1,41 @@
+{
+  "_comment": "Template used by install.sh — model names are replaced at install time based on your RAM tier. Copy this to ~/.continue/config.json and replace MODEL_CHAT, MODEL_AUTOCOMPLETE, MODEL_REASONING with your actual model names from: ollama list",
+
+  "models": [
+    {
+      "title": "Qwen Coder (Chat)",
+      "provider": "ollama",
+      "model": "MODEL_CHAT",
+      "apiBase": "http://localhost:11434",
+      "contextLength": 32768,
+      "completionOptions": {
+        "temperature": 0.1,
+        "maxTokens": 4096
+      },
+      "capabilities": {
+        "tools": false
+      }
+    },
+    {
+      "title": "DeepSeek R1 (Reasoning)",
+      "provider": "ollama",
+      "model": "MODEL_REASONING",
+      "apiBase": "http://localhost:11434",
+      "contextLength": 131072,
+      "completionOptions": {
+        "temperature": 0.1,
+        "maxTokens": 4096
+      },
+      "capabilities": {
+        "tools": false
+      }
+    }
+  ],
+  "tabAutocompleteModel": {
+    "title": "Qwen Coder (Autocomplete)",
+    "provider": "ollama",
+    "model": "MODEL_AUTOCOMPLETE",
+    "apiBase": "http://localhost:11434"
+  },
+  "allowAnonymousTelemetry": false
+}
