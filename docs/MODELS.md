@@ -10,6 +10,7 @@ Used when you press Cmd+L and type a question. Handles most requests: writing co
 **Best options by RAM:**
 - 32GB+: `qwen2.5-coder:32b` — near GPT-4o quality for coding
 - 16GB: `qwen2.5-coder:14b` — very good, handles most tasks well
+  > **16GB reality check:** `qwen2.5-coder:14b` uses 9GB. Your OS takes another 4–5GB. Close other apps before loading it, or use `qwen2.5-coder:7b` for everyday sessions and reserve 14B for when you need it.
 - 8GB: `qwen2.5-coder:7b` — solid for simple tasks, slower on complex ones
 
 ### 2. Autocomplete Model (Tab suggestions)
@@ -70,7 +71,7 @@ ollama pull llama3.3:70b
 # Mistral's coding model
 ollama pull codestral:22b
 
-# Microsoft's small but fast model
+# Microsoft's small but fast model — ideal as OpenClaw's always-on gateway model on 16GB (only 2.5GB)
 ollama pull phi4-mini
 ```
 
