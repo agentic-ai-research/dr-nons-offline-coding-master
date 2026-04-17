@@ -227,6 +227,43 @@ Aider requires a git repo to track its changes.
 
 ---
 
+
+## 16GB RAM
+
+### System slows down or fans spin when using `qwen2.5-coder:14b`
+
+**What it means:** The 14B model uses ~9GB. Combined with macOS (~4–5GB), you're near the 16GB ceiling. Memory pressure causes swapping to disk and tanks performance.
+
+**Fix:** Close Chrome, Slack, and any other heavy apps before starting a coding session. If you can't close them, use `qwen2.5-coder:7b` (4.7GB) for everyday work — it's somewhat slower on complex tasks but leaves enough headroom for a normal workday.
+
+**Alternative model worth trying:** `qwen3.5:9b` (6.6GB) — a newer model that sits between 7B and 14B in both size and quality. Fits comfortably on 16GB.
+
+---
+
+### OpenClaw responds sluggishly or makes the machine slow all day
+
+**What it means:** OpenClaw runs 24/7 as a boot service. If its default model is `qwen2.5-coder:14b`, that 9GB stays loaded in RAM continuously — even when you're not actively using it — leaving almost nothing for everything else.
+
+**Fix — edit `~/.openclaw/openclaw.json`, change the primary model to a lighter one:**
+
+Find the `agents.defaults.model.primary` field and change it to:
+```
+"ollama/qwen2.5:7b"
+```
+Or for the lightest possible footprint (recommended on 16GB):
+```
+"ollama/phi4-mini"
+```
+
+Then restart the OpenClaw gateway:
+```bash
+launchctl unload ~/Library/LaunchAgents/ai.openclaw.gateway.plist
+launchctl load ~/Library/LaunchAgents/ai.openclaw.gateway.plist
+```
+
+---
+
+
 ## General
 
 ### Everything was working, now nothing works after a restart
