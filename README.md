@@ -36,6 +36,7 @@ One command. Thirty minutes. Then you have:
 No subscriptions. No API keys. No data leaving your machine. No internet required after setup.
 
 **This is your AI stack. You own it.**
+This guide isn't just documentation. It's the result of hours of banging my head against the same walls — failed, failed, failed — until I finally cracked what actually works on real hardware. I worked through it with Claude, iterating on configs, tracking down cryptic errors one by one, and testing on a real 16GB Mac. What you're reading is the distillation of that pain. If it saves you even two hours, it was worth writing down.
 
 ---
 
@@ -82,6 +83,19 @@ This setup was built through real-world trial and error. Every error in this tab
 **Best experience:** Apple Silicon Mac (M1–M4) with 32GB+ RAM. Unified memory architecture makes local LLMs dramatically faster than equivalent PC hardware.
 
 ---
+
+
+## 16GB RAM: The Honest Story
+
+The hardware table above is technically correct. What it doesn't tell you is how close to the edge 16GB actually is. After hours of real-world testing, here is what you actually need to know:
+
+- **`qwen2.5-coder:14b` is the right chat model — but it uses 9GB.** Your OS takes another 4–5GB. On 16GB that leaves almost nothing. Before loading it: close Chrome, close Slack, close everything except VS Code. Otherwise memory pressure kicks in and the model runs at half speed on swap.
+- **One model at a time.** Ollama auto-swaps when you switch models (chat → reasoning → back), but on 16GB each swap takes ~30 seconds while it unloads one and loads the other. This is normal. It is not broken. Wait for it.
+- **OpenClaw's gateway model must be small.** OpenClaw runs 24/7 as a background service. If its default model is `qwen2.5-coder:14b`, that 9GB stays resident all day — even when you're not actively coding — and the machine crawls. In `~/.openclaw/openclaw.json`, set `"primary": "ollama/qwen2.5:7b"` or `"ollama/phi4-mini"`. Reserve 14B for focused coding sessions.
+- **`capabilities.tools: false` for DeepSeek is non-negotiable.** One line. Without it, DeepSeek R1 throws an error on every single message. Add it to every DeepSeek entry in `~/.continue/config.json`. No exceptions.
+- **`continue.enableNewExperience: false` in VS Code settings.** Without this, Continue ignores your local models and tries to route through GitHub Copilot. The error (`Unable to resolve chat model: copilot-base`) is cryptic enough that most people spend an hour debugging in the wrong place.
+- **`phi4-mini` is underrated.** At 2.5GB it leaves 13GB free, starts in seconds, and handles most everyday coding questions well. Ideal as OpenClaw's always-on gateway model. Use 14B only when you need serious multi-file reasoning.
+
 
 ## Installation
 
